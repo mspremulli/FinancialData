@@ -27,7 +27,8 @@ public class FinanceRecord {
   public FinanceRecord() {
   }
 
-  public FinanceRecord(int step,
+  public FinanceRecord(int id,
+                       int step,
                        String type,
                        double amount,
                        String nameOrig,
@@ -37,6 +38,7 @@ public class FinanceRecord {
                        double newBalanceDest,
                        String nameDest,
                        int isFraud) {
+    this.id = id;
     this.step = step;
     this.type = type;
     this.amount = amount;
