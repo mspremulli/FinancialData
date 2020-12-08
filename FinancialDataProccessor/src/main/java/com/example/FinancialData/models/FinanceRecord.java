@@ -11,7 +11,7 @@ public class FinanceRecord {
 
   @Id
   @GeneratedValue
-  private int id;
+  private long id;
 
   private int step;
   private  String  type;
@@ -27,7 +27,7 @@ public class FinanceRecord {
   public FinanceRecord() {
   }
 
-  public FinanceRecord(int id,
+  public FinanceRecord(long id,
                        int step,
                        String type,
                        double amount,
@@ -51,7 +51,7 @@ public class FinanceRecord {
     this.isFraud = isFraud;
   }
 
-  public int getId() {
+  public long getId() {
     return id;
   }
 
