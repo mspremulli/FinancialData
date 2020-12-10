@@ -28,13 +28,8 @@ public class financeService {
     return repository.findAll();
   }
 
-  public void addRecord(FinanceRecord record){
-    repository.save(record);
-  }
-
   public void deleteAll(){
     repository.deleteAll();
   }
-
 
 }

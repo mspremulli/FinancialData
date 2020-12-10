@@ -17,7 +17,6 @@ public class financeController {
 
   @GetMapping("/getAll")
   public Object getAllFiles(){
-    System.out.println("test");
     return service.getAllRecords();
   }
 
