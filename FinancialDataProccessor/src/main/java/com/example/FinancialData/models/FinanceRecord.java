@@ -14,14 +14,14 @@ public class FinanceRecord {
   private long id;
 
   private int step;
-  private  String  type;
+  private String  type;
   private double amount;
-  private  String nameOrig;
+  private String nameOrig;
   private double oldBalanceOrg;
   private double newBalanceOrig;
   private double oldBalanceDest;
   private double newBalanceDest;
-  private  String nameDest;
+  private String nameDest;
   private int isFraud ;
 
   public FinanceRecord() {

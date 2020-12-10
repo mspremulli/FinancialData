@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,25 +17,14 @@ import org.apache.commons.csv.CSVRecord;
 
 
 public class CSVHelper {
-//  public static String TYPE = "text/csv";
-//  static String[] headers = { "Id", "Title", "Description", "Published" };
-
-//  public static boolean hasCSVFormat(MultipartFile file) {
-//
-//    if (!TYPE.equals(file.getContentType())) {
-//      return false;
-//    }
-//
-//    return true;
-//  }
 
   public static List<FinanceRecord> csvImport(InputStream is) {
-    try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+    try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
          CSVParser csvParser = new CSVParser(fileReader,
-                 CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());
+                 CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim())
          ) {
 
-      List<FinanceRecord> records = new ArrayList<FinanceRecord>();
+      List<FinanceRecord> records = new ArrayList<>();
 
       Iterable<CSVRecord> csvRecords = csvParser.getRecords();
 
