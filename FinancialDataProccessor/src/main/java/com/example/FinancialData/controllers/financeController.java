@@ -2,10 +2,7 @@ package com.example.FinancialData.controllers;
 
 import com.example.FinancialData.services.financeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
@@ -22,6 +19,11 @@ public class financeController {
   public Object getAllFiles(){
     System.out.println("test");
     return service.getAllRecords();
+  }
+
+  @DeleteMapping("/deleteAll")
+  public void deleteAll(){
+    service.deleteAll();
   }
 
 }

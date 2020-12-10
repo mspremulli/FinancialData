@@ -32,5 +32,9 @@ public class financeService {
     repository.save(record);
   }
 
+  public void deleteAll(){
+    repository.deleteAll();
+  }
+
 
 }
