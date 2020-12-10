@@ -17,14 +17,14 @@ public class financeService {
 
   public void importCVS(MultipartFile file){
     try {
-      List<FinanceRecord> tutorials = CSVHelper.csvImport(file.getInputStream());
-      repository.saveAll(tutorials);
+      List<FinanceRecord> records = CSVHelper.csvImport(file.getInputStream());
+      repository.saveAll(records);
     } catch (IOException e) {
       throw new RuntimeException("fail to store csv data: " + e.getMessage());
     }
   }
 
-  public List<FinanceRecord> getAllTutorials() {
+  public List<FinanceRecord> getAllRecords() {
     return repository.findAll();
   }
 
