@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.csv.CSVFormat;
@@ -35,15 +36,14 @@ public class CSVHelper {
         FinanceRecord record = new FinanceRecord(
                 Integer.parseInt(csvRecord.get("step")),
                 csvRecord.get("type"),
-                Integer.parseInt(csvRecord.get("amount")),
+                Double.parseDouble(csvRecord.get("amount")),
                 csvRecord.get("nameOrig"),
-                Integer.parseInt(csvRecord.get("oldBalanceOrg")),
+                Double.parseDouble(csvRecord.get("oldBalanceOrg")),
                 csvRecord.get("nameDest"),
-                Integer.parseInt(csvRecord.get("newBalanceOrig")),
-                Integer.parseInt(csvRecord.get("oldBalanceDest")),
-                Integer.parseInt(csvRecord.get("newBalanceDest")),
+                Double.parseDouble(csvRecord.get("newBalanceOrig")),
+                Double.parseDouble(csvRecord.get("oldBalanceDest")),
+                Double.parseDouble(csvRecord.get("newBalanceDest")),
                 Integer.parseInt(csvRecord.get("isFraud"))
-
         );
         records.add(record);
       }
