@@ -15,10 +15,11 @@ public class financeService {
   @Autowired
   private financeRepository repository;
 
-  public void importCVS(MultipartFile file){
+  public List<FinanceRecord> importCVS(MultipartFile file){
     try {
       List<FinanceRecord> records = CSVHelper.csvImport(file.getInputStream());
       repository.saveAll(records);
+      return records;
     } catch (IOException e) {
       throw new RuntimeException("fail to store csv data: " + e.getMessage());
     }

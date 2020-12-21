@@ -18,10 +18,12 @@ import org.apache.commons.csv.CSVRecord;
 
 public class CSVHelper {
 
-  public static List<FinanceRecord> csvImport(InputStream is) {
-    try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-         CSVParser csvParser = new CSVParser(fileReader,
-                 CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim())
+  public static List<FinanceRecord> csvImport(InputStream in) {
+    String[] headers = { "step", "type", "amount", "nameOrig", "oldBalanceOrg", "nameDest", "newBalanceOrig", "oldBalanceDest", "newBalanceDest", "isFraud" };
+
+    try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(in));
+         CSVParser csvParser = new CSVParser(fileReader  //, CSVFormat.POSTGRESQL_CSV.withFirstRecordAsHeader())
+                 , CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase())
          ) {
 
       List<FinanceRecord> records = new ArrayList<>();
@@ -30,14 +32,26 @@ public class CSVHelper {
 
       //todo use mutlithreading
       for (CSVRecord csvRecord : csvRecords) {
-        FinanceRecord record = new FinanceRecord();
+        FinanceRecord record = new FinanceRecord(
+                Integer.parseInt(csvRecord.get("step")),
+                csvRecord.get("type"),
+                Integer.parseInt(csvRecord.get("amount")),
+                csvRecord.get("nameOrig"),
+                Integer.parseInt(csvRecord.get("oldBalanceOrg")),
+                csvRecord.get("nameDest"),
+                Integer.parseInt(csvRecord.get("newBalanceOrig")),
+                Integer.parseInt(csvRecord.get("oldBalanceDest")),
+                Integer.parseInt(csvRecord.get("newBalanceDest")),
+                Integer.parseInt(csvRecord.get("isFraud"))
+
+        );
         records.add(record);
       }
 
       return records;
 
     } catch (IOException e) {
-      throw new RuntimeException("failed to parse CSV file: " + e.getMessage());
+      throw new RuntimeException("Failed to import file: " + e.getMessage());
     }
   }
 
