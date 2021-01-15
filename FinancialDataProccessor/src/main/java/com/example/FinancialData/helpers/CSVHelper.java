@@ -22,26 +22,26 @@ public class CSVHelper {
     Reader reader = new InputStreamReader(file.getInputStream());
 
     BufferedReader br = new BufferedReader(reader);
-    br.readLine();
+    String header = br.readLine();
     int counter = 0;
-    String temp = "";
+    String tempFile = "";
 
     String line = "";
     while ((line = br.readLine()) != null) {
      if(counter < numOfFiles){
-       temp += line + "\n";
+       tempFile += line + "\n";
       counter++;
      }
      else{
-       fileText.add(temp);
+       fileText.add(tempFile);
        counter = 0;
-       temp = "";
+       tempFile = "";
      }
     }
-    if(!temp.equals("")) fileText.add(temp);
+    if(!tempFile.equals("")) fileText.add(tempFile);
 
     ArrayList<FinanceRecord> recordsList = new ArrayList<>();
-    String header = "step,type,amount,nameOrig,oldBalanceOrg,newBalanceOrig,nameDest,oldBalanceDest,newBalanceDest,isFraud \n";
+//    String header = "step,type,amount,nameOrig,oldBalanceOrg,newBalanceOrig,nameDest,oldBalanceDest,newBalanceDest,isFraud \n";
     for (String text : fileText ) {
       recordsList.addAll(csvImport(new File(header + text)));
     }
