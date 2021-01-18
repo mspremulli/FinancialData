@@ -17,7 +17,7 @@ public class financeService {
 
   public List<FinanceRecord> importCVS(MultipartFile file){
     try {
-      List<FinanceRecord> records = CSVHelper.fileSplitter(file, 775);
+      List<FinanceRecord> records = CSVHelper.fileSplitter(file, 55);
       repository.saveAll(records);
       return records;
     } catch (IOException e) {

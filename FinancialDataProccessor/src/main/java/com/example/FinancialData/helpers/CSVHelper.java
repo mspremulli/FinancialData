@@ -24,33 +24,33 @@ public class CSVHelper {
     BufferedReader br = new BufferedReader(reader);
     String header = br.readLine();
     int counter = 0;
-    String tempFile = "";
+    StringBuilder tempFile = new StringBuilder();
 
     String line = "";
     while ((line = br.readLine()) != null) {
      if(counter < numOfFiles){
-       tempFile += line + "\n";
+       tempFile.append(line).append("\n");
       counter++;
      }
      else{
-       fileText.add(tempFile);
+       fileText.add(tempFile.toString());
        counter = 0;
-       tempFile = "";
+       tempFile = new StringBuilder();
      }
     }
-    if(!tempFile.equals("")) fileText.add(tempFile);
+    if(!tempFile.toString().equals("")) fileText.add(tempFile.toString());
 
     ArrayList<FinanceRecord> recordsList = new ArrayList<>();
 //    String header = "step,type,amount,nameOrig,oldBalanceOrg,newBalanceOrig,nameDest,oldBalanceDest,newBalanceDest,isFraud \n";
     for (String text : fileText ) {
-      recordsList.addAll(csvImport(new File(header + text)));
+//      recordsList.addAll(csvImport(new File(header + "\n" + text)));
     }
-
+    recordsList.addAll(csvImport(new File(header + "\n" + fileText.get(0))));
     return recordsList;
   }
 
   public static List<FinanceRecord> csvImport(File file) throws IOException {
-    String[] headers = { "step", "type", "amount", "nameOrig", "oldBalanceOrg", "nameDest", "newBalanceOrig", "oldBalanceDest", "newBalanceDest", "isFraud" };
+    String[] headers = { "step", "type", "amount", "nameOrig", "oldBalanceOrg", "newBalanceOrig", "nameDest", "oldBalanceDest", "newBalanceDest", "isFraud", "isFlaggedFraud" };
 
     Reader reader = new InputStreamReader(new FileInputStream(file));
 
