@@ -17,8 +17,9 @@ public class financeService {
 
   public List<FinanceRecord> importCVS(MultipartFile file){
     try {
-      List<FinanceRecord> records = CSVHelper.fileSplitter(file, 55);
+      List<FinanceRecord> records = CSVHelper.fileSplitter(file, 100);
       repository.saveAll(records);
+
       return records;
     } catch (IOException e) {
       throw new RuntimeException("fail to store csv data: " + e.getMessage());

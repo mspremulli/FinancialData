@@ -4,9 +4,7 @@ import com.example.FinancialData.models.FinanceRecord;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Spliterator;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
@@ -43,7 +41,7 @@ public class CSVHelper {
     ArrayList<FinanceRecord> recordsList = new ArrayList<>();
 //    String header = "step,type,amount,nameOrig,oldBalanceOrg,newBalanceOrig,nameDest,oldBalanceDest,newBalanceDest,isFraud \n";
     for (String text : fileText ) {
-//      recordsList.addAll(csvImport(new File(header + "\n" + text)));
+      recordsList.addAll(csvImport(new File(header + "\n" + text)));
     }
     recordsList.addAll(csvImport(new File(header + "\n" + fileText.get(0))));
     return recordsList;
