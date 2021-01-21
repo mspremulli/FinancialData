@@ -41,7 +41,10 @@ public class CSVHelper {
     ArrayList<FinanceRecord> recordsList = new ArrayList<>();
 //    String header = "step,type,amount,nameOrig,oldBalanceOrg,newBalanceOrig,nameDest,oldBalanceDest,newBalanceDest,isFraud \n";
     for (String text : fileText ) {
-      recordsList.addAll(csvImport(new File(header + "\n" + text)));
+      FileWriter temp = new FileWriter("local");
+      temp.write(text);
+
+      recordsList.addAll(csvImport(new File("local")));
     }
     recordsList.addAll(csvImport(new File(header + "\n" + fileText.get(0))));
     return recordsList;
